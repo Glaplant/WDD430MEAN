@@ -1,0 +1,15 @@
+h1 {
+  color: #123456;
+}
+
+app-warning {
+  color: red;
+  font-weight: 900;
+  font-size: 4rem;
+}
+
+app-success {
+  color: green;
+  font-weight: 900;
+  font-size: 4rem;
+}
