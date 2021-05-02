@@ -258,6 +258,7 @@
               "projects/recipe/src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "projects/recipe/src/styles.css"
             ],
             "scripts": []

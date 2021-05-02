@@ -19,7 +19,11 @@ class="btn btn-primary"
 (click)="onCreateServer()">Add Server</button>
 
 
-<p>{{serverCreationStatus}}</p>
+<!-- <p>{{serverCreationStatus}}</p> -->
+<p *ngIf="serverCreated else: noServer">"The new Server Name is "{{serverName}}</p>
+<ng-Template #noServer>
+    <p>No server was created.</p>
+</ng-Template> 
 
 
 <h3>Atribute Binding
@@ -31,7 +35,7 @@ class="btn btn-primary"
 <p >{{allowNewServer}}</p>
 
 <h4>Assignment: Data & Event Binding</h4>
-
+<hr>
 <!--Add a input field which updates a property ('username') via TwoWayBinding-->
 <input type = "text" class=form-control [(ngModel)] = "userName" >
 
