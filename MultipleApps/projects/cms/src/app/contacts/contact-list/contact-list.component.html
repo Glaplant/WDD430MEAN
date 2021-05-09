@@ -6,10 +6,7 @@
                     <a  class="pull-right btn btn-success btn-lg" href="#" role="button">New Contact</a>
                 </div>
                 <div class="panel panel-body">
-                <a class="list-group-item clearfix" *ngFor="let contact of contacts">
-                    <h2 style="display:inline-block">{{contact.name}}</h2>
-                    <img [src]="contact.image" alt="{{contact.name}}" class="image-responsive pull-right" style="max-height:100px">
-                </a>
+               <app-contact-item *ngFor="let contactEl of contacts" [contacts]="contactEl" (click)="onSelected( contactEl )"></app-contact-item>
             </div>
         </div>
 </div>

@@ -353,6 +353,123 @@
           }
         }
       }
+    },
+    "academindW3": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/academind-w3",
+      "sourceRoot": "projects/academind-w3/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/academindW3",
+            "index": "projects/academind-w3/src/index.html",
+            "main": "projects/academind-w3/src/main.ts",
+            "polyfills": "projects/academind-w3/src/polyfills.ts",
+            "tsConfig": "projects/academind-w3/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/academind-w3/src/favicon.ico",
+              "projects/academind-w3/src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "projects/academind-w3/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/academind-w3/src/environments/environment.ts",
+                  "with": "projects/academind-w3/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "academindW3:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "academindW3:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "academindW3:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/academind-w3/src/test.ts",
+            "polyfills": "projects/academind-w3/src/polyfills.ts",
+            "tsConfig": "projects/academind-w3/tsconfig.spec.json",
+            "karmaConfig": "projects/academind-w3/karma.conf.js",
+            "assets": [
+              "projects/academind-w3/src/favicon.ico",
+              "projects/academind-w3/src/assets"
+            ],
+            "styles": [
+              "projects/academind-w3/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/academind-w3/tsconfig.app.json",
+              "projects/academind-w3/tsconfig.spec.json",
+              "projects/academind-w3/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/academind-w3/e2e/protractor.conf.js",
+            "devServerTarget": "academindW3:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "academindW3:serve:production"
+            }
+          }
+        }
+      }
     }
   },
   "defaultProject": "CMS"
