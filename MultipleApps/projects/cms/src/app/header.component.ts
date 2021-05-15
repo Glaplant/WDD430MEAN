@@ -5,6 +5,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrls: ['./app.component.css']
 })
+
+
 export class HeaderComponent implements OnInit {
 
   @Output() selectedFeatureEvent = new EventEmitter<string>();

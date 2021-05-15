@@ -7,8 +7,10 @@
       </div>
     <div class="panel-body">
     <div class="center-panel">
-    <app-documents-item></app-documents-item>
+    <app-documents-item *ngFor="let document of documents" [documents]="document" (click)="onSelectedDocument(document)"></app-documents-item>
     </div>
     </div>
     
     </div>
+
+  
