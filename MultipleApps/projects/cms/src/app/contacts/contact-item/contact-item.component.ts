@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import { Contact } from '../contact.model';
 
 @Component({
@@ -14,6 +14,9 @@ export class ContactItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+console.log(this.contacts)
   }
+
+  
 
 }
