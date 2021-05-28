@@ -7,6 +7,7 @@ import { Document } from './document.model';
 })
 export class DocumentService {
 
+  documentChangedEvent = new EventEmitter<Document[]>();
   selectedDocumentEvent = new EventEmitter<Document>();
   documents: Document[];
 
@@ -19,13 +20,22 @@ export class DocumentService {
    }
 
    getDocument(id:string):Document{
-    this.documents.forEach( 
-      document => {
-      if(document.id === id){
-      return document;
-      }
-    }
-    )
-    return null;
+    const result = this.documents.filter( document => document.id === id);
+    return result[0] ? result[0] : null;
   }
+
+  deleteDocument(document: Document){
+    if(!document){
+      return;
+    }
+
+  const pos = this.documents.indexOf(document);
+  if (pos < 0) {
+     return;
+  }
+  this.documents.splice(pos, 1);
+  this.documentChangedEvent.emit(this.documents.slice());
+}
+
+  
 }

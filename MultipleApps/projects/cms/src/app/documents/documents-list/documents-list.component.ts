@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import{ Document } from "../document.model";
 import { DocumentService } from '../document.service';
 @Component({
@@ -12,15 +12,23 @@ export class DocumentsListComponent implements OnInit {
 
 
   documents: Document[] = [];
+  
 
-
-  constructor(private document:DocumentService) { }
+  constructor(private documentService:DocumentService) {
+    this.documents = this.documentService.getDocuments();
+   }
 
   ngOnInit(){
-    this.documents = this.document.getDocuments();
+    
+    this.documentService.documentChangedEvent
+    .subscribe(( documents: Document []) => {
+     this.documents = documents;
+    })
+
+    }
   }
 
 
 
 
-}
+
