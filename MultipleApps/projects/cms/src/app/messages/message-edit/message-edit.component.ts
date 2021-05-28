@@ -26,8 +26,11 @@ const subject = this.subjectRef.nativeElement.value;
 const messageTxt = this.msgTextRef.nativeElement.value;
 const sender = this.currentSender;
 const message = new Message (sender,subject,messageTxt,sender);
-console.log(message);
+//console.log(message);
 this.messagesService.addMessage(message);
+this.subjectRef.nativeElement.value = "";
+this.msgTextRef.nativeElement.value = "";
+
   
  
  
@@ -35,7 +38,8 @@ this.messagesService.addMessage(message);
 
   onClear(){
    
-    this.messagesService.removeMessage();
+   this.messagesService.removeMessage();
+    
  
 
 }
