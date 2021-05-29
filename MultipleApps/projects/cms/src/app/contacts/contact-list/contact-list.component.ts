@@ -11,14 +11,20 @@ export class ContactListComponent implements OnInit {
 
  
     contacts: Contact[] = [];
-  constructor(private contact:ContactService ) { }
+  constructor(private contactService:ContactService ) { }
 
   ngOnInit(){
-    this.contacts = this.contact.getContacts();
+    this.contacts = this.contactService.getContacts();
+    this.contactService.contactChangedEvent
+    .subscribe(
+      (contacts: Contact[]) =>{
+        this.contacts = contacts;
+      }
+    )
   }
 
   onSelected(contact: Contact){
-  this.contact.selectedContactEvent.emit(contact);
+  this.contactService.selectedContactEvent.emit(contact);
   }
 
 }

@@ -5,8 +5,8 @@
                 <h1>{{contacts.name}}</h1>
                 <img [src]="contacts.imageUrl" alt="contacts.name">
                 <div class="pull-right btn-toolbar">
-                    <button type="button"class="btn btn-primary">EDIT</button>
-                    <button type="buttton" class="btn btn-danger ml-2">DELETE</button>
+                    <a style="cursor:pointer;" routerLink="edit" class="btn btn-primary">EDIT</a>
+                    <a style="cursor:pointer;" (click)="onDelete()" class="btn btn-danger ml-2">DELETE</a>
                 </div>
             </div>
             <div class="panel-body">
