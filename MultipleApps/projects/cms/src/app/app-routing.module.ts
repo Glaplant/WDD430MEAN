@@ -1,5 +1,7 @@
 import{ NgModule} from '@angular/core';
 import{ Routes, RouterModule} from '@angular/router';
+import { ContactDetailComponent } from './contacts/contact-detail/contact-detail.component';
+import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { DocumentsDetailComponent } from './documents/documents-detail/documents-detail.component';
 import { DocumentsEditComponent } from './documents/documents-edit/documents-edit.component';
@@ -14,7 +16,11 @@ const appRoutes: Routes = [
         {path:':id/edit', component: DocumentsEditComponent},
     ]},
     {path:'messages', component: MessageListComponent},
-    {path:'contacts', component: ContactsComponent},
+    {path:'contacts', component: ContactsComponent, children: [
+        {path:'new', component: ContactEditComponent},
+        {path:':id', component: ContactDetailComponent},
+        {path:':id/edit', component: ContactEditComponent}
+    ]},
 
 ]
 

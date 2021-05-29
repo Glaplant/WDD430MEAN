@@ -9,12 +9,14 @@ import { Contact } from '../contact.model';
 export class ContactItemComponent implements OnInit {
 
   @Input() contacts: Contact;
+  id: string;
+  index: string;
   // @Output() selectedContactEvent = new EventEmitter<void>();
 
   constructor() { }
 
   ngOnInit(): void {
-console.log(this.contacts)
+this.index = this.contacts.id;
   }
 
   
