@@ -1,4 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { Subject } from 'rxjs';
 import{ Message } from './message.model'; 
 import{ MOCKMESSAGES } from './MOCKMESSAGES';
 
@@ -7,7 +8,7 @@ import{ MOCKMESSAGES } from './MOCKMESSAGES';
 })
 export class MessagesService {
 
-  messageChangedEvent = new EventEmitter<Message[]>();
+  messageChangedEvent = new Subject<Message[]>();
   messages: Message[];
 
   constructor() { 
@@ -27,7 +28,7 @@ export class MessagesService {
   addMessage(message:Message){
     this.messages.push(message);
     //console.log(this.messages);
-    this.messageChangedEvent.emit(this.messages.slice());
+    this.messageChangedEvent.next(this.messages.slice());
 
 
   }
@@ -35,7 +36,7 @@ export class MessagesService {
   removeMessage(){
     this.messages.pop();
     console.log(this.messages);
-    this.messageChangedEvent.emit(this.messages.slice());
+    this.messageChangedEvent.next(this.messages.slice());
 
   }
 }
