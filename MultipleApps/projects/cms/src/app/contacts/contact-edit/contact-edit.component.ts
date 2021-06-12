@@ -14,7 +14,7 @@ export class ContactEditComponent implements OnInit {
   originalContact: Contact;
   contact: Contact;
   editMode: boolean = false;
-  groupContacts: string;
+  groupContacts: Contact[];
 
   constructor(private contactService: ContactService,
               private route: ActivatedRoute,
@@ -31,4 +31,31 @@ onCancel(){
 onSubmit(form: NgForm){
   console.log(form);
 }
+
+isInvalidContact(newContact:Contact){
+  if(!newContact){
+    return true;
+  }
+  if(this.contact && newContact.id === this.contact.id){
+    return true;
+  }
+  for(let i = 0; i < this.groupContacts.length; i++){
+    if(newContact.id === this.groupContacts[i].id){
+      return true;
+    }
+  }
+return false;
+}
+
+
+addToGroup($event: any) {
+  const selectedContact: Contact = $event.dragData;
+  const invalidGroupContact = this.isInvalidContact(selectedContact);
+  if (invalidGroupContact){
+     return;
+  }
+  this.groupContacts.push(selectedContact);
+}
+
+
 }
