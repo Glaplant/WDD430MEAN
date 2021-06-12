@@ -8,8 +8,8 @@ import { Subject } from 'rxjs';
 })
 export class DocumentService {
 
-  documentChangedEvent = new Subject<Document[]>();
-  selectedDocumentEvent = new Subject<Document>();
+  documentChangedEvent = new Subject <Document[]> ();
+  selectedDocumentEvent = new Subject <Document> ();
   documents: Document[];
   maxDocumentId: number;
 
