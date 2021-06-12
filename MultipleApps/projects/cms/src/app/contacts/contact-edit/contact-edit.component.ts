@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import{ NgForm } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Contact } from '../contact.model';
+import { ContactService } from '../contact.service';
 
 @Component({
   selector: 'app-contact-edit',
@@ -7,9 +11,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactEditComponent implements OnInit {
 
-  constructor() { }
+  originalContact: Contact;
+  contact: Contact;
+  editMode: boolean = false;
+  groupContacts: string;
+
+  constructor(private contactService: ContactService,
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
+
   }
 
+onCancel(){
+  this.router.navigate(['/contact']);
+}
+
+onSubmit(form: NgForm){
+  console.log(form);
+}
 }
