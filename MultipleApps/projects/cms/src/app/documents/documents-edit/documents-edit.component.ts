@@ -15,6 +15,7 @@ export class DocumentsEditComponent implements OnInit {
   originalDocument: Document;
   document: Document;
   editMode: boolean = false;
+  id:string;
 
   constructor( private documentService: DocumentService,
     private router: Router,
@@ -24,13 +25,13 @@ export class DocumentsEditComponent implements OnInit {
     this.route.params
     .subscribe(
       (params: Params) =>{
-        const id = params.id
-        if(!id){
+        this.id = params.id
+        if(!this.id){
           this.editMode = false;
           return;
         }
 
-        this.originalDocument =this.documentService.getDocument(id);
+        this.originalDocument =this.documentService.getDocument(this.id);
         if (!this.originalDocument){
           return;
         }

@@ -16,7 +16,7 @@ export class ContactItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-this.index = this.contacts.id;
+  this.index = this.contacts.id;
   }
 
   
