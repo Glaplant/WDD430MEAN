@@ -3,19 +3,28 @@
         <div class="panel panel-default">
             <div class="panel-heading clearfix" style="min-height:50px;">
                 <h1>{{contacts.name}}</h1>
-                <img [src]="contacts.imageUrl" alt="contacts.name">
+                <img [src]="contacts.imageUrl" alt="{{altDescription}}">
                 <div class="pull-right btn-toolbar">
                     <a style="cursor:pointer;" routerLink="edit" class="btn btn-primary">EDIT</a>
                     <a style="cursor:pointer;" (click)="onDelete()" class="btn btn-danger ml-2">DELETE</a>
                 </div>
             </div>
             <div class="panel-body">
+                
                 <address>Email:{{contacts.email}}</address>
                 <address>Phone:{{contacts.phone}}</address>
-              <!-- <p>{{contact.email}}</p>
-              <p>{{contact.phone}}</p> -->
+            
             
             </div>
+            <div *ngIf="contacts.group">
+                <app-contact-item  *ngFor="let contact of contacts" [contacts]="contact">
+                </app-contact-item>
+            </div>
+                
+            
+            
+            
+           
 
         </div>
     </div>

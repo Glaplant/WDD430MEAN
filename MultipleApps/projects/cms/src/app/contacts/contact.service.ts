@@ -23,6 +23,7 @@ export class ContactService {
 
   getContact(id:string):Contact{
   const result = this.contacts.filter( contact => contact.id === id);
+  console.log(result)
   return result[0] ? result[0] : null;
 }
 
@@ -85,9 +86,12 @@ this.contactChangedEvent.next(this.contacts.slice());
 }
 
 
+getAltTag(contacts: Contact){
+  if(contacts.imageUrl.length <= 1 || !contacts.imageUrl) {
+  return '';
+}
+return contacts.name
 
-
-
-
+}
 
 }

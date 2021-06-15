@@ -9,24 +9,26 @@ import { ContactService } from '../contact.service';
   templateUrl: './contact-edit.component.html',
   styleUrls: ['./contact-edit.component.css']
 })
-export class ContactEditComponent implements OnInit {
+export class ContactEditComponent implements OnInit{
 
   originalContact: Contact;
-  contact: Contact;
+  contacts: Contact;
   editMode: boolean = false;
   groupContacts: Contact[] = [];
   id:string;
+  invalid: boolean = false;
 
   constructor(private contactService: ContactService,
               private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit(){
+    console.log(this.route.params);
     this.route.params
     .subscribe (
       (params: Params) => {
         console.log(params.id)
-         this.id = params.id
+         this.id = params.id;
          if (!this.id ){
             this.editMode = false
             return;
@@ -37,11 +39,11 @@ export class ContactEditComponent implements OnInit {
              return;
          }
          this.editMode = true
-         this.contact = JSON.parse(JSON.stringify(this.originalContact));
-         console.log(this.contact);
+         this.contacts = JSON.parse(JSON.stringify(this.originalContact));
+         console.log(this.contacts);
    
-         if (this.contact.group) {
-            this.groupContacts = JSON.parse(JSON.stringify(this.contact.group));
+         if (this.contacts.group) {
+            this.groupContacts = JSON.parse(JSON.stringify(this.contacts.group));
             console.log(this.groupContacts);
          }
     }) 
@@ -56,9 +58,9 @@ onCancel(){
 onSubmit(form: NgForm){
   const value = form.value;
   console.log(value);
-  const newContact = new Contact(value.id, value.name, value.email, value.phone, value.imageUrl, value.group
+  const newContact = new Contact(value.id, value.name, value.email, value.phone, value.imageUrl, this.groupContacts
     );
-  console.log(newContact);
+  console.log(newContact,newContact.group);
  if(this.editMode){
    this.contactService.updateDocument(this.originalContact, newContact)
  }
@@ -76,7 +78,7 @@ isInvalidContact(newContact: Contact) {
   if (!newContact) {// newContact has no value
     return true;
   }
-  if (this.contact && newContact.id === this.contact.id) {
+  if (this.contacts && newContact.id === this.contacts.id) {
      return true;
   }
   for (let i = 0; i < this.groupContacts.length; i++){
@@ -90,12 +92,17 @@ isInvalidContact(newContact: Contact) {
 
 
 addToGroup($event: any) {
+  console.log($event.dragData)
   const selectedContact: Contact = $event.dragData;
   const invalidGroupContact = this.isInvalidContact(selectedContact);
   if (invalidGroupContact){
+    console.log(selectedContact);
+    console.log(invalidGroupContact);
+    this.invalid = true;
      return;
   }
   this.groupContacts.push(selectedContact);
+  this.invalid = false;
 }
 
 
@@ -106,5 +113,7 @@ onRemoveItem(index: number) {
   }
   this.groupContacts.splice(index, 1);
 }
+
+
 
 }

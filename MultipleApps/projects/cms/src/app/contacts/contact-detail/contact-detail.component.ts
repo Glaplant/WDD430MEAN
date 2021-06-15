@@ -11,7 +11,9 @@ export class ContactDetailComponent implements OnInit {
 
   @Input() contacts: Contact;
   id: string;
-  
+  group: Contact[];
+  altDescription: string;
+
   
   
   constructor(private router: Router,
@@ -20,14 +22,20 @@ export class ContactDetailComponent implements OnInit {
 
   ngOnInit(): void {
 
+    
+    
+
     this.route.params
     .subscribe(
       (params:Params) =>{  
         this.id = params['id'];
         this.contacts = this.contactService.getContact(this.id);
+        this.altDescription = this.contactService.getAltTag(this.contacts);
 
       }
     )
+
+    console.log(this.contacts.group)
   }
 
   onDelete(){

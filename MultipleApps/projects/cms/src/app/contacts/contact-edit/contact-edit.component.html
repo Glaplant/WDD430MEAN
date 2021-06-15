@@ -12,7 +12,7 @@
               max="120"
               required
               name="name"
-              [ngModel]= contact?.name
+              [ngModel]= contacts?.name
               #name= "ngModel"
               >
           </div>
@@ -29,7 +29,7 @@
               max="255"
               required
               name="email"
-              [ngModel]=contact?.email
+              [ngModel]=contacts?.email
               #email= "ngModel"
               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
               >
@@ -47,7 +47,7 @@
               size="150"
               max="255"
               name="phone"
-              [ngModel]=contact?.phone
+              [ngModel]=contacts?.phone
               #phone= "ngModel"
               pattern="\D*([2-9]\d{2})(\D*)([2-9]\d{2})(\D*)(\d{4})\D*"
               >
@@ -65,7 +65,7 @@
               size="150"
               max="255"
               name="imageUrl"
-              [ngModel]=contact?.imageUrl
+              [ngModel]=contacts?.imageUrl
               #imageUrl= "ngModel">
           </div>
         </div>
@@ -73,20 +73,23 @@
         <div class="row">
           <div class="form-group">
             <label for="groupList">Group Contacts:</label>
-  
+               <div class="alert alert-danger" *ngIf="invalid">Contact cannot be added to this group. It is already in group or is the
+              current contact</div>
             <div class="row" id="groupList"
                 style="min-height: 3rem;"
                 dnd-droppable [dropZones]="['groupContacts']" (onDropSuccess)="addToGroup($event)" >
   
               <div *ngFor="let contact of groupContacts; let i = index">
                 <div>
-                  <app-contact-item class="col-sm-11" [contact]="contact"></app-contact-item>
+                  <app-contact-item class="col-sm-11" [contacts]="contact"></app-contact-item>
                   <button class="btn btn-danger col-sm-2 deleteButton" (click)="onRemoveItem(i)">X</button>
                 </div>
               </div>
               <span class="dragMsg" *ngIf="groupContacts?.length < 1">Drag contacts in group here</span>
+
             </div>
-  
+   
+
           </div>
         </div>
   
