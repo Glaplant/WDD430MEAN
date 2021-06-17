@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import{ NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { __assign } from 'tslib';
 import { Contact } from '../contact.model';
 import { ContactService } from '../contact.service';
 
@@ -39,11 +40,12 @@ export class ContactEditComponent implements OnInit{
              return;
          }
          this.editMode = true
-         this.contacts = JSON.parse(JSON.stringify(this.originalContact));
+         this.contacts = Object.assign({}, this.originalContact);
          console.log(this.contacts);
    
          if (this.contacts.group) {
-            this.groupContacts = JSON.parse(JSON.stringify(this.contacts.group));
+           console.log(this.contacts.group);
+            this.groupContacts = Object.assign(this.groupContacts, this.contacts.group);
             console.log(this.groupContacts);
          }
     }) 

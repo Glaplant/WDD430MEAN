@@ -25,8 +25,8 @@ export class ContactItemComponent implements OnInit {
   this.name = this.contacts.name;
   
   
-console.log(this.contacts.imageUrl)
-console.log(this.contacts.imageUrl.length);
+// console.log(this.contacts.imageUrl)
+// console.log(this.contacts.imageUrl.length);
 this.altDescription = this.contactService.getAltTag(this.contacts)
  // if(this.contacts.imageUrl.length <= 1 || !this.contacts.imageUrl) this.altDescription = "";
 
