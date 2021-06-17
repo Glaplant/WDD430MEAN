@@ -21,6 +21,7 @@ import { ContactEditComponent } from './contacts/contact-edit/contact-edit.compo
 import { FormsModule } from '@angular/forms';
 import { DndModule } from 'ng2-dnd';
 import { HttpClientModule} from '@angular/common/http/';
+import { ContactsFilterPipe } from './contacts/contacts-filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,8 @@ import { HttpClientModule} from '@angular/common/http/';
     MessageListComponent,
     DropdownDirective,
     DocumentsEditComponent,
-    ContactEditComponent
+    ContactEditComponent,
+    ContactsFilterPipe
     
     
   

@@ -9,10 +9,12 @@ import { ContactService } from '../contact.service';
   styleUrls: ['./contact-list.component.css']
 })
 export class ContactListComponent implements OnInit, OnDestroy {
-
- 
+  
+    term: string;
     contacts: Contact[] = [];
     private subscription: Subscription;
+
+
   constructor(private contactService:ContactService ) { }
 
   ngOnInit(){
@@ -31,6 +33,10 @@ export class ContactListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     this.subscription.unsubscribe();
+  }
+
+  search(value:string){
+  this.term = value;
   }
 
 }
