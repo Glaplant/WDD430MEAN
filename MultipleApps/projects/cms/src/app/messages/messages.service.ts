@@ -1,4 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import{ Message } from './message.model'; 
 import{ MOCKMESSAGES } from './MOCKMESSAGES';
@@ -11,7 +12,7 @@ export class MessagesService {
   messageChangedEvent = new Subject<Message[]>();
   messages: Message[];
 
-  constructor() { 
+  constructor( private http: HttpClient) { 
     this.messages = MOCKMESSAGES;
   }
 

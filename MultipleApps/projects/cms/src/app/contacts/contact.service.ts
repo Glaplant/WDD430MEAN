@@ -1,4 +1,5 @@
 import { Injectable} from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Contact} from'../contacts/contact.model';
 import { MOCKCONTACTS} from './MOCKCONTACTS';
@@ -11,7 +12,7 @@ export class ContactService {
   selectedContactEvent = new Subject<Contact>();
   contacts: Contact[];
   maxContactId: number;
-  constructor() {
+  constructor(private http: HttpClient) {
     this.contacts = MOCKCONTACTS;
    }
 

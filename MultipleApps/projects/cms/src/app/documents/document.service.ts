@@ -1,7 +1,10 @@
 import { Injectable,EventEmitter } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MOCKDOCUMENTS } from './MOCKDOCUMENTS';
 import { Document } from './document.model';
 import { Subject } from 'rxjs';
+import { SortableComponent } from 'ng2-dnd';
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,18 +13,36 @@ export class DocumentService {
 
   documentChangedEvent = new Subject <Document[]> ();
   selectedDocumentEvent = new Subject <Document> ();
-  documents: Document[];
+  documents: Document[] = [];
   maxDocumentId: number;
 
-  constructor() {
-    this.documents = MOCKDOCUMENTS;
-    this.maxDocumentId = this.getMaxID();
+  constructor(private http: HttpClient) {
+    // this.documents = MOCKDOCUMENTS;
+    // this.maxDocumentId = this.getMaxID();
    }
 
 
    getDocuments():Document[]{
-    return this.documents.slice();
-   }
+     this.http.get('https://mean-adc35-default-rtdb.firebaseio.com/documents.json')
+     .subscribe( (documents: Document[]) => {
+       this.documents = documents;
+       this.maxDocumentId = this.getMaxID();
+       this.documents.sort(function(a,b){
+         if( a.name > b.name ) return 1;
+         else if(a.name < b.name) return -1;
+         return 0 ;
+        });
+      this.documentChangedEvent.next(this.documents.slice());
+    //  }
+     console.log(this.documents);
+     
+     
+    });
+
+    return this.documents
+     
+  
+}
 
 
    getDocument(id:string):Document{
