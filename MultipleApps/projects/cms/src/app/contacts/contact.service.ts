@@ -1,8 +1,8 @@
 import { Injectable} from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Contact} from'../contacts/contact.model';
-import { MOCKCONTACTS} from './MOCKCONTACTS';
+// import { MOCKCONTACTS} from './MOCKCONTACTS';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,11 +13,28 @@ export class ContactService {
   contacts: Contact[];
   maxContactId: number;
   constructor(private http: HttpClient) {
-    this.contacts = MOCKCONTACTS;
+    // this.contacts = MOCKCONTACTS;
    }
 
    getContacts():Contact[]{
-     return this.contacts.slice();
+    this.http.get('https://mean-adc35-default-rtdb.firebaseio.com/contacts.json')
+    .subscribe( (contacts: Contact[]) => {
+      this.contacts = contacts;
+      this.maxContactId = this.getMaxID();
+      // this.contacts.sort(function(a,b){
+      //   if( a.name > b.name ) return 1;
+      //   else if(a.name < b.name) return -1;
+      //   return 0 ;
+      //  });
+     this.contactChangedEvent.next(this.contacts.slice());
+   //  }
+    console.log(this.contacts);
+    
+    
+   });
+
+  return this.contacts
+    //  return this.contacts.slice();
 
   
   }
@@ -40,8 +57,8 @@ deleteContact(contact: Contact){
   }
 
   this.contacts.splice(pos,1);
-  this.contactChangedEvent.next(this.contacts.slice());
-
+  // this.contactChangedEvent.next(this.contacts.slice());
+  this.storeContacts();
 }
 
 
@@ -68,7 +85,8 @@ addContact( newContact: Contact){
   newContact.id = String(this.maxContactId);
   this.contacts.push(newContact);
 //  const docListCopy = this.documents.slice();
-  this.contactChangedEvent.next( this.contacts.slice());
+  // this.contactChangedEvent.next( this.contacts.slice());
+  this.storeContacts();
 }
 
 
@@ -82,17 +100,26 @@ if (pos < 0 ) return;
 newContact.id = originalContact.id;
 this.contacts[pos] = newContact;
 //const documnetListCopy = this.documents.slice();
-this.contactChangedEvent.next(this.contacts.slice());
+// this.contactChangedEvent.next(this.contacts.slice());
+this.storeContacts();
 
 }
 
 
 getAltTag(contacts: Contact){
-  if(contacts.imageUrl.length <= 1 || !contacts.imageUrl) {
-  return '';
-}
-return contacts.name
+  if(contacts.imageUrl) 
+  return contacts.name
 
+}
+
+storeContacts(){
+  this.http.put('https://mean-adc35-default-rtdb.firebaseio.com/contacts.json', this.contacts)
+  .subscribe( response => {
+    this.contactChangedEvent.next(this.contacts.slice());
+//console.log(response)
+ // this.documentChangedEvent.next(this.documents.slice());
+}
+  )
 }
 
 }

@@ -1,9 +1,8 @@
 import { Injectable,EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { MOCKDOCUMENTS } from './MOCKDOCUMENTS';
 import { Document } from './document.model';
 import { Subject } from 'rxjs';
-import { SortableComponent } from 'ng2-dnd';
+
 
 
 @Injectable({
@@ -19,14 +18,14 @@ export class DocumentService {
   constructor(private http: HttpClient) {
     // this.documents = MOCKDOCUMENTS;
     // this.maxDocumentId = this.getMaxID();
-   }
+  }
 
 
-   getDocuments():Document[]{
+  getDocuments():Document[]{
      this.http.get('https://mean-adc35-default-rtdb.firebaseio.com/documents.json')
      .subscribe( (documents: Document[]) => {
        this.documents = documents;
-       this.maxDocumentId = this.getMaxID();
+       this.maxDocumentId = this.getMaxId();
        this.documents.sort(function(a,b){
          if( a.name > b.name ) return 1;
          else if(a.name < b.name) return -1;
@@ -42,10 +41,10 @@ export class DocumentService {
     return this.documents
      
   
-}
+  }
 
 
-   getDocument(id:string):Document{
+  getDocument(id:string):Document{
     const result = this.documents.filter( document => document.id === id);
     return result[0] ? result[0] : null;
   }
@@ -54,7 +53,7 @@ export class DocumentService {
   deleteDocument(document: Document){
     if(!document){
       return;
-    }
+  }
 
 
   const pos = this.documents.indexOf(document);
@@ -62,53 +61,64 @@ export class DocumentService {
      return;
   }
   this.documents.splice(pos, 1);
-  this.documentChangedEvent.next(this.documents.slice());
-}
-
-
-
-getMaxID(): number{
-  let maxId = 0 ;
-
-  this.documents.forEach( document => {
-  const currentId = parseInt(document.id);
-  if( currentId > maxId){
-    maxId = currentId;
+  // this.documentChangedEvent.next(this.documents.slice());
+  this.storeDocuments();
   }
 
-  });
-
-  return maxId
-}
 
 
+  getMaxId(): number{
+    let maxId = 0 ;
 
-addDocument( newDocument: Document){
-  if (!newDocument) return ;
+    this.documents.forEach( document => {
+    const currentId = parseInt(document.id);
+    if( currentId > maxId){
+      maxId = currentId;
+    }
 
-  this.maxDocumentId++
-  newDocument.id = String(this.maxDocumentId);
-  this.documents.push(newDocument);
-//  const docListCopy = this.documents.slice();
-  this.documentChangedEvent.next( this.documents.slice());
-}
+    });
 
-
-
-updateDocument( originalDocument: Document, newDocument: Document){
-if ( !originalDocument || !newDocument) return;
-
-const pos = this.documents.indexOf(originalDocument);
-if (pos < 0 ) return;
-
-newDocument.id = originalDocument.id;
-this.documents[pos] = newDocument;
-//const documnetListCopy = this.documents.slice();
-this.documentChangedEvent.next(this.documents.slice());
-
-}
+    return maxId
+  }
 
 
 
+  addDocument( newDocument: Document){
+    if (!newDocument) return ;
+
+    this.maxDocumentId++
+    newDocument.id = String(this.maxDocumentId);
+    this.documents.push(newDocument);
+  //  const docListCopy = this.documents.slice();
+    // this.documentChangedEvent.next( this.documents.slice());
+    this.storeDocuments();
+  }
+
+
+
+  updateDocument( originalDocument: Document, newDocument: Document){
+    if ( !originalDocument || !newDocument) return;
+
+    const pos = this.documents.indexOf(originalDocument);
+    if (pos < 0 ) return;
+
+    newDocument.id = originalDocument.id;
+    this.documents[pos] = newDocument;
+    //const documnetListCopy = this.documents.slice();
+   // this.documentChangedEvent.next(this.documents.slice());
+    this.storeDocuments();
+
+  }
+
+
+  storeDocuments(){
+    this.http.put('https://mean-adc35-default-rtdb.firebaseio.com/documents.json', this.documents)
+    .subscribe( response => {
+      this.documentChangedEvent.next(this.documents.slice());
+//console.log(response)
+   // this.documentChangedEvent.next(this.documents.slice());
+  }
+    )
+  }
   
 }

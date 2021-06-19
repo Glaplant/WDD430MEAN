@@ -3,8 +3,8 @@
         <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
             <div class="row">
                 <div class="col-xs-12 btn-toolbar">
-                    <button type="submit" class="btn btn-success">Save </button>
-                    <button type="button" class="btn btn-danger"> Cancel </button>
+                    <button type="submit" class="btn btn-success" [disabled]="!recipeForm.valid">Save </button>
+                    <button type="button" class="btn btn-danger" (click)="onCancel"> Cancel </button>
                 </div>
             </div>
             <div class="row">
@@ -28,13 +28,14 @@
                         id="imagePath"
                         class="form-control"
                         formControlName="imagePath"
+                        #imgPath
                         >
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                 <img src="" class="img-responsive">
+                 <img [src]="imgPath.value" class="img-responsive">
                 </div>
             </div>
             <div class="row">
@@ -53,7 +54,9 @@
             </div>
             <div class="row">
                 <div class="col-xs-12" formArrayName='ingredients'>
-                    <div class="row" *ngFor="let ingredientCtrl of controls; let i = index" [formGroupName]="i">
+                    <div class="row" *ngFor="let ingredientCtrl of controls; let i = index" 
+                    [formGroupName]="i"
+                    style="margin-top: 10px;">
                         <div class="col-xs-8">
                             <input
                             type="text"
@@ -67,7 +70,13 @@
                             formControlName="amount">
                         </div>
                         <div class="col-xs-2">
-                           <button class="btn btn-danger">X</button>
+                           <button type="button" class="btn btn-danger" (click)="onDeleteIngredient(i)">X</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button type="button" class="btn btn-success" (click)="onAddIngredient()">Add Ingredient</button>
                         </div>
                     </div>
                 </div>

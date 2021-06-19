@@ -1,15 +1,19 @@
 import{ Injectable} from '@angular/core';
-import { Recipe } from './recipe.model';
+import{ Subject } from 'rxjs';
+import { Recipe } from '../recipes/recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
 
-@Injectable()
+
+@Injectable( {providedIn: 'root'})
 export class RecipeService{
+
+    recipesChanged = new Subject<Recipe[]>();
 
     private recipes: Recipe[] = [
         new Recipe(
-            'A Test recipe',
+            'Chicken and Waffles',
             'This is simply a test',
             'https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2015/11/shakshuka-11.jpg',
             
@@ -20,7 +24,7 @@ export class RecipeService{
             ]),
         
         new Recipe(
-            'A Test recipe',
+            'Another Test recipe',
             'This is simply a test',
             'https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2015/11/shakshuka-11.jpg',
                 
@@ -31,12 +35,20 @@ export class RecipeService{
     
                 ]),
     ];
-
+    // private recipes: Recipe[] = []
     constructor( private slService: ShoppingListService){
 
 
     }
-    getRecipies(){
+
+    setRecipes( recipes: Recipe []){
+        this.recipes = recipes;
+        console.log(this.recipes.slice());
+        this.recipesChanged.next(this.recipes.slice());
+    }
+
+
+    getRecipes(){
         return this.recipes.slice();
     }
 
@@ -49,5 +61,22 @@ export class RecipeService{
     addShoppingListToIngredients(ingredients:Ingredient[]){
         this.slService.addIngredients(ingredients);
 
+    }
+
+    addRecipe(recipe: Recipe){
+        this.recipes.push(recipe);
+        this.recipesChanged.next(this.recipes.slice());
+
+    }
+
+    updateRecipe( index: number, newRecipe: Recipe){
+    this.recipes[index] = newRecipe; 
+    this.recipesChanged.next(this.recipes.slice());
+    }
+
+    deleteRecipe(index: number){
+        this.recipes.splice(index, 1);
+        // console.log(this.recipes.slice())
+        this.recipesChanged.next(this.recipes.slice());
     }
 }
