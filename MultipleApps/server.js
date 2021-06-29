@@ -47,9 +47,9 @@ app.use(express.static(path.join(__dirname, 'dist/CMS')));
 app.use('/', index);
 
 // ... ADD YOUR CODE TO MAP YOUR URL'S TO ROUTING FILES HERE ...
-// app.use('/messages', messagesRoutes);
-// app.use('/contacts', contactsRoutes);
-// app.use('/documents', documentsRoutes);
+app.use('/messages', messagesRoutes);
+app.use('/contacts', contactsRoutes);
+app.use('/documents', documentsRoutes);
 
 // Tell express to map all other non-defined routes back to the index page
 app.get('*', (req, res) => {
