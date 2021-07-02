@@ -1,7 +1,12 @@
-import { Injectable,EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Document } from './document.model';
 import { Subject } from 'rxjs';
+
+interface Response {
+  message: string,
+  documents: Document []
+}
 
 
 
@@ -22,7 +27,7 @@ export class DocumentService {
 
 
   getDocuments():Document[]{
-     this.http.get('https://mean-adc35-default-rtdb.firebaseio.com/documents.json')
+     this.http.get('http://localhost:3000/documents')
      .subscribe( (documents: Document[]) => {
        this.documents = documents;
        this.maxDocumentId = this.getMaxId();
@@ -50,19 +55,26 @@ export class DocumentService {
   }
 
 
-  deleteDocument(document: Document){
-    if(!document){
+  deleteDocument(document: Document) {
+
+    if (!document) {
       return;
-  }
+    }
 
+    const pos = this.documents.findIndex(d => d.id === document.id);
 
-  const pos = this.documents.indexOf(document);
-  if (pos < 0) {
-     return;
-  }
-  this.documents.splice(pos, 1);
-  // this.documentChangedEvent.next(this.documents.slice());
-  this.storeDocuments();
+    if (pos < 0) {
+      return;
+    }
+
+    // delete from database
+    this.http.delete('https://localhost:3000/documents/' + document.id)
+      .subscribe(
+        (response: Response) => {
+          this.documents.splice(pos, 1);
+          this.documentChangedEvent.next(this.documents.slice());
+        }
+      );
   }
 
 
@@ -83,31 +95,58 @@ export class DocumentService {
 
 
 
-  addDocument( newDocument: Document){
-    if (!newDocument) return ;
+  addDocument(document: Document) {
+    if (!document) {
+      return;
+    }
 
-    this.maxDocumentId++
-    newDocument.id = String(this.maxDocumentId);
-    this.documents.push(newDocument);
-  //  const docListCopy = this.documents.slice();
-    // this.documentChangedEvent.next( this.documents.slice());
-    this.storeDocuments();
+    // make sure id of the new Document is empty
+    document.id = '';
+
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    // add to database
+    this.http.post<{ message: string, document: Document }>('https://localhost:3000/documents',
+      document,
+      { headers: headers })
+      .subscribe(
+        (responseData) => {
+          // add new document to documents
+          this.documents.push(responseData.document);
+          this.documentChangedEvent.next(this.documents.slice());
+        }
+      );
   }
 
 
 
-  updateDocument( originalDocument: Document, newDocument: Document){
-    if ( !originalDocument || !newDocument) return;
 
-    const pos = this.documents.indexOf(originalDocument);
-    if (pos < 0 ) return;
+  updateDocument(originalDocument: Document, newDocument: Document) {
+    if (!originalDocument || !newDocument) {
+      return;
+    }
 
+    const pos = this.documents.findIndex(d => d.id === originalDocument.id);
+
+    if (pos < 0) {
+      return;
+    }
+
+    // set the id of the new Document to the id of the old Document
     newDocument.id = originalDocument.id;
-    this.documents[pos] = newDocument;
-    //const documnetListCopy = this.documents.slice();
-   // this.documentChangedEvent.next(this.documents.slice());
-    this.storeDocuments();
+    newDocument.id = originalDocument.id;
 
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    // update database
+    this.http.put('http://localhost:3000/documents/' + originalDocument.id,
+      newDocument, { headers: headers })
+      .subscribe(
+        (response: Response) => {
+          this.documents[pos] = newDocument;
+          this.documentChangedEvent.next(this.documents.slice());
+        }
+      );
   }
 
 

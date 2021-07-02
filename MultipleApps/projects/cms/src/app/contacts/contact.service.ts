@@ -1,5 +1,5 @@
 import { Injectable} from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Contact} from'../contacts/contact.model';
 // import { MOCKCONTACTS} from './MOCKCONTACTS';
@@ -17,7 +17,7 @@ export class ContactService {
    }
 
    getContacts():Contact[]{
-    this.http.get('https://mean-adc35-default-rtdb.firebaseio.com/contacts.json')
+    this.http.get('http://localhost:3000/contacts')
     .subscribe( (contacts: Contact[]) => {
       this.contacts = contacts;
       this.maxContactId = this.getMaxID();
@@ -46,19 +46,26 @@ export class ContactService {
 }
 
 
-deleteContact(contact: Contact){
-  if(!contact){
+deleteContact(contact: Contact) {
+
+  if (!contact) {
     return;
   }
 
-  const pos = this.contacts.indexOf(contact);
-  if ( pos < 0) {
+  const pos = this.contacts.findIndex(d => d.id === contact.id);
+
+  if (pos < 0) {
     return;
   }
 
-  this.contacts.splice(pos,1);
-  // this.contactChangedEvent.next(this.contacts.slice());
-  this.storeContacts();
+  // delete from database
+  this.http.delete('https://localhost:3000/documents/' + contact.id)
+    .subscribe(
+      (response: Response) => {
+        this.contacts.splice(pos, 1);
+        this.contactChangedEvent.next(this.contacts.slice());
+      }
+    );
 }
 
 
@@ -77,32 +84,56 @@ getMaxID(): number{
 }
 
 
+addContact(contact: Contact) {
+  if (!contact) {
+    return;
+  }
 
-addContact( newContact: Contact){
-  if (!newContact) return ;
+  // make sure id of the new Document is empty
+  contact.id = '';
 
-  this.maxContactId++
-  newContact.id = String(this.maxContactId);
-  this.contacts.push(newContact);
-//  const docListCopy = this.documents.slice();
-  // this.contactChangedEvent.next( this.contacts.slice());
-  this.storeContacts();
+  const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+  // add to database
+  this.http.post<{ message: string, contact: Contact }>('https://localhost:3000/contacts',
+    contact,
+    { headers: headers })
+    .subscribe(
+      (responseData) => {
+        // add new document to documents
+        this.contacts.push(responseData.contact);
+        this.contactChangedEvent.next(this.contacts.slice());
+      }
+    );
 }
 
 
+updateContact(originalContact: Contact, newContact: Contact) {
+  if (!originalContact || !newContact) {
+    return;
+  }
 
-updateDocument( originalContact: Contact, newContact: Contact){
-if ( !originalContact || !newContact) return;
+  const pos = this.contacts.findIndex(d => d.id === originalContact.id);
 
-const pos = this.contacts.indexOf(originalContact);
-if (pos < 0 ) return;
+  if (pos < 0) {
+    return;
+  }
 
-newContact.id = originalContact.id;
-this.contacts[pos] = newContact;
-//const documnetListCopy = this.documents.slice();
-// this.contactChangedEvent.next(this.contacts.slice());
-this.storeContacts();
+  // set the id of the new Document to the id of the old Document
+  newContact.id = originalContact.id;
+  newContact.id = originalContact.id;
 
+  const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+  // update database
+  this.http.put('http://localhost:3000/contacts/' + originalContact.id,
+    newContact, { headers: headers })
+    .subscribe(
+      (response: Response) => {
+        this.contacts[pos] = newContact;
+        this.contactChangedEvent.next(this.contacts.slice());
+      }
+    );
 }
 
 
@@ -113,7 +144,7 @@ getAltTag(contacts: Contact){
 }
 
 storeContacts(){
-  this.http.put('https://mean-adc35-default-rtdb.firebaseio.com/contacts.json', this.contacts)
+  this.http.put('http://localhost:3000/contacts', this.contacts)
   .subscribe( response => {
     this.contactChangedEvent.next(this.contacts.slice());
 //console.log(response)

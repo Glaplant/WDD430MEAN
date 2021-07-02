@@ -19,7 +19,7 @@ export class MessagesService {
 
   getMessages():Message[]{
    // return this.messages.slice();
-   this.http.get('https://mean-adc35-default-rtdb.firebaseio.com/messages.json')
+   this.http.get('http://localhost:3000/messages')
    .subscribe( (messages: Message[]) => {
      this.messages = messages;
      this.maxMessageId = this.getMaxId();
@@ -48,13 +48,25 @@ export class MessagesService {
   }
 
   addMessage(message:Message){
-    this.messages.push(message);
-    //console.log(this.messages);
-    this.storeMessages();
+    if (!message) {
+      return;
+    }
 
+    message.id=""
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-  }
-
+    this.http.post<{  message: Message }>('https://localhost:3000/documents',
+      document,
+      { headers: headers })
+      .subscribe(
+        (responseData) => {
+          // add new document to documents
+          this.messages.push(responseData.message);
+          this.messageChangedEvent.next(this.messages.slice());
+        }
+      );
+      }
+      
   removeMessage(){
     this.messages.pop();
     console.log(this.messages);
@@ -80,7 +92,7 @@ export class MessagesService {
  
 
   storeMessages(){
-    this.http.put('https://mean-adc35-default-rtdb.firebaseio.com/messages.json', this.messages)
+    this.http.put('http://localhost:3000/messages', this.messages)
     .subscribe( response => {
       this.messageChangedEvent.next(this.messages.slice());
   //console.log(response)

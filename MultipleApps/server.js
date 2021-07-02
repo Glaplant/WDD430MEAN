@@ -2,6 +2,7 @@
 const express = require('express');
 const path = require('path');
 const http = require('http');
+const mongoose = require('mongoose');
 //const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -55,6 +56,19 @@ app.use('/documents', documentsRoutes);
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/CMS/index.html'));
 });
+
+
+// establish a connection to the mongo database
+mongoose.connect('mongodb://localhost:27017/cms',
+   { useNewUrlParser: true }, (err, res) => {
+      if (err) {
+         console.log('Connection failed: ' + err);
+      }
+      else {
+         console.log('Connected to database!');
+      }
+   }
+);
 
 // Define the port address and tell express to use this port
 const port = process.env.PORT || '3000';

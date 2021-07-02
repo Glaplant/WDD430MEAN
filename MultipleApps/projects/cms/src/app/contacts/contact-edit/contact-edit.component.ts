@@ -64,7 +64,7 @@ onSubmit(form: NgForm){
     );
   console.log(newContact,newContact.group);
  if(this.editMode){
-   this.contactService.updateDocument(this.originalContact, newContact)
+   this.contactService.updateContact(this.originalContact, newContact)
  }
 else{
 this.contactService.addContact(newContact)
