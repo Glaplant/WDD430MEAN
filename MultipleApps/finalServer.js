@@ -8,10 +8,12 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
 // import the routing file to handle the default (index) route
-const index = require("./projects/cms/server/routes/app");
-const messagesRoutes = require("./projects/cms/server/routes/messages");
-const contactsRoutes = require("./projects/cms/server/routes/contacts");
-const documentsRoutes = require("./projects/cms/server/routes/documents");
+const index = require("./projects/final/server/routes/app");
+const gamesRoutes = require("./projects/final/server/routes/games");
+const collectionsRoutes = require("./projects/final/server/routes/collections");
+// const messagesRoutes = require("./projects/cms/server/routes/messages");
+// const contactsRoutes = require("./projects/cms/server/routes/contacts");
+// const documentsRoutes = require("./projects/cms/server/routes/documents");
 
 // ... ADD CODE TO IMPORT YOUR ROUTING FILES HERE ...
 
@@ -44,24 +46,26 @@ app.use((req, res, next) => {
 
 // Tell express to use the specified director as the
 // root directory for your web site
-app.use(express.static(path.join(__dirname, "dist/CMS")));
+app.use(express.static(path.join(__dirname, "dist/final")));
 
 // Tell express to map the default route ('/') to the index route
 app.use("/", index);
 
 // ... ADD YOUR CODE TO MAP YOUR URL'S TO ROUTING FILES HERE ...
-app.use("/messages", messagesRoutes);
-app.use("/contacts", contactsRoutes);
-app.use("/documents", documentsRoutes);
+app.use("/games", gamesRoutes);
+app.use("/collections", collectionsRoutes);
+// app.use("/messages", messagesRoutes);
+// app.use("/contacts", contactsRoutes);
+// app.use("/documents", documentsRoutes);
 
 // Tell express to map all other non-defined routes back to the index page
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist/CMS/index.html"));
+  res.sendFile(path.join(__dirname, "dist/final/index.html"));
 });
 
 // establish a connection to the mongo database
 mongoose.connect(
-  "mongodb://localhost:27017/cms",
+  "mongodb://localhost:27017/final",
   { useNewUrlParser: true },
   (err, res) => {
     if (err) {

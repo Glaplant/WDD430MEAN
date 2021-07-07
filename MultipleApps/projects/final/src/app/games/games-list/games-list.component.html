@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="title">Games</h1>
+      </div>
+      <div class="panel-body">
+        <app-games-item
+          *ngFor="let game of games"
+          [games]="game"
+        ></app-games-item>
+      </div>
+    </div>
+  </div>
+</div>

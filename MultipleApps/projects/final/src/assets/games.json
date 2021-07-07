@@ -1,0 +1,298 @@
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "1",
+    "console": "NES",
+    "name": "Super Mario Brother",
+    "rareness": "easy",
+    "release": "1986",
+    "price": "$14.42",
+    "genre":"Action & Adventure"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "2",
+    "console": "NES",
+    "name": "Super Mario Brother 2",
+    "rareness": "easy",
+    "release": "October 1, 1988",
+    "price": "$21.48",
+    "genre":"Action & Adventure"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "3",
+    "console": "NES",
+    "name": "Super Mario Brother 3",
+    "rareness": "easy",
+    "release": "February 12, 1990",
+    "price": "$15.27"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "4",
+    "console": "NES",
+    "name": "Zelda",
+    "rareness": "easy",
+    "release": "August 22, 1987",
+    "price": "$24.28"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "5",
+    "console": "NES",
+    "name": "Link",
+    "rareness": "easy",
+    "release": "September 1, 1988",
+    "price": "$19.90"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "6",
+    "console": "NES",
+    "name": "Duck Hunt",
+    "rareness": "easy",
+    "release": "1986",
+    "price": "$14.42"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "7",
+    "console": "NES",
+    "name": "Metroid",
+    "rareness": "easy",
+    "release": "1986",
+    "price": "$14.42"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "8",
+    "console": "NES",
+    "name": "Final Fantsy",
+    "rareness": "easy",
+    "release": "1986",
+    "price": "$14.42"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "9",
+    "console": "NES",
+    "name": "Dragon Warrior",
+    "rareness": "easy",
+    "release": "1986",
+    "price": "$14.42"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "10",
+    "console": "NES",
+    "name": "Ghost and Goblins",
+    "rareness": "easy",
+    "release": "1986",
+    "price": "$14.42"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "11",
+    "console": "NES",
+    "name": "Castle Vania",
+    "rareness": "easy",
+    "release": "1986",
+    "price": "$14.42"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "12",
+    "console": "NES",
+    "name": "Metroid",
+    "rareness": "easy",
+    "release": "1986",
+    "price": "$14.42"
+}
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "13",
+    "console": "NES",
+    "name": "Mega Man",
+    "rareness": "easy",
+    "release": "1986",
+    "price": "$14.42"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "console": "NES",
+    "name": "Excite Bike",
+    "rareness": "easy",
+    "release": "1986",
+    "price": "$14.42"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "14",
+    "console": "NES",
+    "name": "Willow",
+    "rareness": "easy",
+    "release": "1986",
+    "price": "$14.42"
+}
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "15",
+    "console": "NES",
+    "name": "Blaster Master",
+    "rareness": "easy",
+    "release": "1986",
+    "price": "$14.42"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "16",
+    "console": "NES",
+    "name": "Bubble Bobble",
+    "rareness": "easy",
+    "release": "1986",
+    "price": "$14.42"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "17",
+    "console": "NES",
+    "name": "Goonies",
+    "rareness": "easy",
+    "release": "1986",
+    "price": "$14.42"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "18",
+    "console": "NES",
+    "name": "Skate or Die",
+    "rareness": "easy",
+    "release": "1986",
+    "price": "$14.42"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "19",
+    "console": "NES",
+    "name": "Legendary Wings",
+    "rareness": "easy",
+    "release": "1986",
+    "price": "$14.42"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "21",
+    "console": "NES",
+    "name": "Double Dragons",
+    "rareness": "easy",
+    "release": "1986",
+    "price": "$14.42"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "22",
+    "console": "NES",
+    "name": "Rygar",
+    "rareness": "easy",
+    "release": "1986",
+    "price": "$14.42"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "23",
+    "console": "NES",
+    "name": "Battletoads",
+    "rareness": "easy",
+    "release": "1986",
+    "price": "$14.42"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "24",
+    "console": "NES",
+    "name": "Teenage Mutant Turtals, Arcade",
+    "rareness": "easy",
+    "release": "1986",
+    "price": "$14.42"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "25",
+    "console": "NES",
+    "name": "Dragon Warior",
+    "rareness": "easy",
+    "release": "1986",
+    "price": "$14.42"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "26",
+    "console": "NES",
+    "name": "Kung Fu",
+    "rareness": "easy",
+    "release": "1986",
+    "price": "$14.42"
+},
+{
+    "_id": {
+        "$oid": "60e3591838e3df209a045426"
+    },
+    "id": "27",
+    "console": "NES",
+    "name": "Mike Tyson's Punch Out",
+    "rareness": "easy",
+    "release": "1986",
+    "price": "$14.42"
+}
