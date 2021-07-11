@@ -15,6 +15,7 @@ export class CollectionListComponent implements OnInit {
   
   constructor(private collectionService: CollectionService) {}
 
+  collectionLength: number;
 
   ngOnInit(): void {
   
@@ -22,6 +23,7 @@ export class CollectionListComponent implements OnInit {
   this.subscription = this.collectionService.collectionChangedEvent.subscribe(
     (collections: Collection[]) => {
       this.collections = collections;
+      this.collectionLength = this.collections.length;
     }
   );
 }

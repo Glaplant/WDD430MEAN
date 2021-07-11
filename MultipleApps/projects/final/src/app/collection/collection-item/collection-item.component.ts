@@ -20,4 +20,8 @@ export class CollectionItemComponent implements OnInit {
     this.rareness = this.collections.rareness;
   }
 
+  onDelete(){
+    this.collectionService.deleteGame(this.collections)
+    console.log(this.collections);
+  }
 }

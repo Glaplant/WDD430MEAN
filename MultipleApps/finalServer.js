@@ -3,7 +3,7 @@ const express = require("express");
 const path = require("path");
 const http = require("http");
 const mongoose = require("mongoose");
-//const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
@@ -27,7 +27,6 @@ app.use(
   })
 );
 app.use(cookieParser());
-
 app.use(logger("dev")); // Tell express to use the Morgan logger
 
 // Add support for CORS

@@ -1,16 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Game } from '../games.model';
+import { ActivatedRoute, Params } from '@angular/router';
 import { GameService } from '../game.service';
-import { Subscription } from 'rxjs';
-import { ActivatedRoute, Router, Params } from '@angular/router';
-
-
+import { Game } from '../games.model';
 @Component({
-  selector: 'app-games-detail',
-  templateUrl: './games-detail.component.html',
-  styleUrls: ['./games-detail.component.scss']
+  selector: 'app-games-edit',
+  templateUrl: './games-edit.component.html',
+  styleUrls: ['./games-edit.component.scss']
 })
-export class GamesDetailComponent implements OnInit {
+export class GamesEditComponent implements OnInit {
   @Input() game: Game[];
   id:string;
   console:string;
@@ -19,12 +16,13 @@ export class GamesDetailComponent implements OnInit {
   rareness:string;
   release:string;
   name:string;
-  private subscription: Subscription;
+  //private subscription: Subscription;
 
 
   constructor(private gameService: GameService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              //private router: Router
+              ) { }
 
               
   ngOnInit(): void {
@@ -49,26 +47,6 @@ export class GamesDetailComponent implements OnInit {
   
   }
 
-  )
-   
-
-
-
- 
-
-
-
-console.log(this.game);
-  }
-
-  // ngOnDestroy(){
-  //   this.subscription.unsubscribe();
-  // }
-
-
-
-
-
-
-  
+  );
+}
 }

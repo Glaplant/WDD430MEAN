@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="title">{{ name }}</h2>
+        <hr />
+        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="submit" class="btn btn-danger" >Cancel</button>
+
+      </div>
+      <form id="game-edit" class="form-padding" #f>
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <label for="name">Title:</label>
+            <input 
+            type="text" 
+            class="form-control"
+            placeholder = "{{ name }} "
+             />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <label>Console: </label>
+            <input 
+            type="text" 
+            class="form-control"
+            placeholder = "{{ console }} " />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <label>Release: </label>
+            <input
+            type="text"
+            class="form-control"
+            placeholder = "{{ release }} "
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <label>Price: </label>
+            <input 
+            type="text" 
+            class="form-control"
+            placeholder = "{{ price }} "
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <label>Rare: </label>
+            <input
+            type="text"
+            class="form-control"
+            placeholder = "{{ rareness }} "
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <label>Genre: </label>
+            <input 
+            type="text" 
+            class="form-control" 
+            placeholder = "{{ genre }} "
+            />
+          </div>
+        </div>
+      </form>
+      <!-- <div class="panel-body game-item-desc">
+        <ul class="list-group">
+          <li class="list-group-item">Console:</li>
+          <li class="list-group-item">Release:</li>
+          <li class="list-group-item">Price:</li>
+          <li class="list-group-item">Rareness:</li>
+          <li class="list-group-item">Genre:</li>
+        </ul>
+      </div> -->
+    </div>
+  </div>
+</div>

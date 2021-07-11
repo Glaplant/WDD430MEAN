@@ -7,7 +7,7 @@ const gameSchema = mongoose.Schema({
   rareness: { type: String, required: true },
   price: { type: String, required: true },
   release: { type: String, required: true },
-  genre: { type: String, required: true },
+  genre: { type: String},
 });
 
 module.exports = mongoose.model("Game", gameSchema);

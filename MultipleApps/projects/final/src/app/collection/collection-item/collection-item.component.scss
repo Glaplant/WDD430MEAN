@@ -1,0 +1,49 @@
+.game-item-container {
+    border: solid 2px grey;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    padding: 0;
+  
+    .game-item-btn {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      min-width: 50px;
+      margin: 0;
+      padding: 0;
+      cursor: pointer;
+    }
+  
+    .game-item-name h2 {
+      min-width: 310px;
+      font-size: clamp(1.5rem, 2.5vw, 3rem);
+    }
+  
+    .game-item-description {
+      align-self: flex-end;
+    }
+  
+    .game-item-plus {
+      color: grey;
+      font-size: 3rem;
+      font-weight: 900;
+      margin: 0;
+      padding: 0;
+      text-decoration: none;
+      line-height: 1rem;
+      margin-right: auto;
+      margin-left: auto;
+    }
+  
+    .game-button-box {
+      align-self: center;
+      text-align: center;
+    }
+  }
+  
+  ul {
+    list-style-type: none;
+  }
+  

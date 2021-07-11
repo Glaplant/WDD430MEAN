@@ -1,8 +1,8 @@
-<div class="panel panel-body game-item-container">
+<div class="panel panel-body game-item-container" >
   <div class="game-item-btn">
-    <a type="button" class="game-item-plus" (click)="addToList()"> + </a>
+    <a type="button" class="game-item-plus" (click)="addToCollectionList()" routerLink="/collections"> + </a>
   </div>
-  <div class="game-item-name">
+  <div class="game-item-name" (click)="gameDetailRoute()">
     <h2>{{ name }}</h2>
   </div>
   <div class="game-item-desc">

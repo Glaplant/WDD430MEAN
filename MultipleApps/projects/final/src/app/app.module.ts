@@ -13,15 +13,19 @@ import { CollectionComponent } from './collection/collection.component';
 import { CollectionListComponent } from './collection/collection-list/collection-list.component';
 import { CollectionItemComponent } from './collection/collection-item/collection-item.component';
 import { RouterModule, Routes } from '@angular/router';
-const appRoutes: Routes = [
-  { path: '', component: GamesComponent },
-  { path: 'nes', component: GamesComponent },
-  { path: 'supernintendo', component: GamesComponent },
-  { path: 'n64', component: GamesComponent },
-  { path: 'gameCube', component: GamesComponent },
-  { path: 'detail', component: GamesDetailComponent },
-  { path: 'collections', component: CollectionComponent },
-];
+import { GamesEditComponent } from './games/games-edit/games-edit.component';
+// const appRoutes: Routes = [
+//   { path: '', component: CollectionComponent },
+//   { path: 'nes', component: GamesComponent },
+//   { path: 'supernintendo', component: GamesComponent },
+//   { path: 'n64', component: GamesComponent },
+//   { path: 'gameCube', component: GamesComponent },
+//   { path: 'detail/:id', component: GamesDetailComponent },
+//   { path: 'collections', component: CollectionComponent },
+//   { path: 'games/:console', component: GamesComponent },
+//   { path: 'edit/:id', component: GamesEditComponent },
+
+// ];
 
 @NgModule({
   declarations: [
@@ -34,12 +38,13 @@ const appRoutes: Routes = [
     CollectionComponent,
     CollectionListComponent,
     CollectionItemComponent,
+    GamesEditComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes),
+   // RouterModule.forRoot(appRoutes),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -15,18 +15,38 @@ constructor(private http: HttpClient) {}
 getCollection(): Collection[] {
   this.http.get('http://localhost:3000/collections').subscribe((collections: Collection[]) => {
     this.collections = collections;
-    // this.maxContactId = this.getMaxID();
-    // this.contacts.sort(function(a,b){
-    //   if( a.name > b.name ) return 1;
-    //   else if(a.name < b.name) return -1;
-    //   return 0 ;
-    //  });
     this.collectionChangedEvent.next(this.collections.slice());
     //  }
     console.log(this.collections);
   });
 
   return this.collections;
-  //  return this.contacts.slice();
+  
 }
+
+deleteGame(collection: Collection) {
+  if (!collection) {
+    return;
+  }
+
+  const pos = this.collections.findIndex((d) => d.id === collection.id);
+
+  if (pos < 0) {
+    return;
+  }
+
+  // delete from database
+  this.http
+    .delete('http://localhost:3000/collections/' + collection.id)
+    .subscribe((response: Response) => {
+      this.collections.splice(pos, 1);
+      this.collectionChangedEvent.next(this.collections.slice());
+    });
+}
+
+
+
+
+
+
 }

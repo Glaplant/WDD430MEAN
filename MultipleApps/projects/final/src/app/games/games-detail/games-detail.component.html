@@ -1,14 +1,21 @@
-<div class="panel panel-body game-item-container">
-  <div class="game-item-name">
-    <h2>name</h2>
-  </div>
-  <div class="game-item-desc">
-    <ul>
-      <li>Console: </li>
-      <li>Release: </li>
-      <li>Price: </li>
-      <li>Rareness:</li>
-      <li>Genre:</li>
-    </ul>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+          <h2 class="title">{{ name }}</h2>
+          <hr>
+        <button class="btn btn-primary" routerLink="edit">Edit</button>
+      </div>
+      
+      <div class="panel-body game-item-desc">
+        <ul class="list-group">
+          <li class="list-group-item">Console:{{ console }}</li>
+          <li class="list-group-item">Release: {{ release }}</li>
+          <li class="list-group-item">Price:{{ price }}</li>
+          <li class="list-group-item">Rare:{{ rareness }}</li>
+          <li class="list-group-item">Genre:{{ genre }}</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
