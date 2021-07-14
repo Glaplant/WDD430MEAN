@@ -170,10 +170,10 @@ export class GameService {
 
         this.games[pos] = newGame;
         console.log(this.games);
-        this.games = this.games.filter(function(){
-          return true
-        })
-        console.log(this.games);
+        // this.games = this.games.filter(function(){
+        //   return true
+        // })
+        // console.log(this.games);
         this.gameChangedEvent.next(this.games.slice());
       });
   }
