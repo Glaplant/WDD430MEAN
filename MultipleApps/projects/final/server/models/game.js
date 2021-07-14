@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const gameSchema = mongoose.Schema({
-  id: { type: String },
+  id: { type: Number },
   console: { type: String, required: true },
   name: { type: String, required: true },
   rareness: { type: String, required: true },

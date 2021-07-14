@@ -20,7 +20,7 @@ export class CollectionListComponent implements OnInit {
   ngOnInit(): void {
   
   this.collections = this.collectionService.getCollection();
-  this.subscription = this.collectionService.collectionChangedEvent.subscribe(
+  this.collectionService.collectionChangedEvent.subscribe(
     (collections: Collection[]) => {
       this.collections = collections;
       this.collectionLength = this.collections.length;

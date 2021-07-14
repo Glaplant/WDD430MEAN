@@ -1,6 +1,6 @@
 export class Game{
 
-    public id?: string;
+    public id?: number;
     public console?: string;
     public name?: string;
     public rareness?: string;
@@ -8,7 +8,7 @@ export class Game{
     public price?: string;
     public genre?: string;
 
-    constructor(id: string, console: string, name: string, rareness: string, release: string, price: string, genre: string){
+    constructor(id: number, console: string, name: string, rareness: string, release: string, price: string, genre: string){
     this.id = id;
     this.console = console;
     this.name = name;

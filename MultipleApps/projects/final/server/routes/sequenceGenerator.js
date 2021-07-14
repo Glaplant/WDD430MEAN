@@ -1,8 +1,6 @@
 var Sequence = require("../models/sequence");
 
-var maxDocumentId;
-var maxMessageId;
-var maxContactId;
+var maxGameId;
 var sequenceId = null;
 
 function SequenceGenerator() {
@@ -15,35 +13,20 @@ function SequenceGenerator() {
     }
 
     sequenceId = sequence.id;
-    maxDocumentId = sequence.maxDocumentId;
-    maxMessageId = sequence.maxMessageId;
-    maxContactId = sequence.maxContactId;
+    maxGameId = sequence.maxGameId;
   });
 }
 
-SequenceGenerator.prototype.nextId = function (collectionType) {
+SequenceGenerator.prototype.nextId = function () {
   var updateObject = {};
   var nextId;
 
-  switch (collectionType) {
-    case "documents":
-      maxDocumentId++;
-      updateObject = { maxDocumentId: maxDocumentId };
-      nextId = maxDocumentId;
-      break;
-    case "messages":
-      maxMessageId++;
-      updateObject = { maxMessageId: maxMessageId };
-      nextId = maxMessageId;
-      break;
-    case "contacts":
-      maxContactId++;
-      updateObject = { maxContactId: maxContactId };
-      nextId = maxContactId;
-      break;
-    default:
-      return -1;
-  }
+
+      maxGametId++;
+      updateObject = { maxGameId: maxGameId };
+      nextId = maxGameId;
+
+  
 
   Sequence.updateOne(
     { id: sequenceId },

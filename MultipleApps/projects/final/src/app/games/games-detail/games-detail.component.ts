@@ -11,8 +11,8 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
   styleUrls: ['./games-detail.component.scss']
 })
 export class GamesDetailComponent implements OnInit {
-  @Input() game: Game[];
-  id:string;
+  games: Game[];
+  id:number;
   console:string;
   price:string;
   genre:string;
@@ -31,22 +31,23 @@ export class GamesDetailComponent implements OnInit {
 
     this.route.params
     .subscribe( (params: Params) =>{
-      this.id = params['id'];
+      this.id = parseInt(params.id);
       console.log(this.id);
-      this.game = this.gameService.getGame(this.id);
+      this.games = this.gameService.getGame(this.id);
   });
 
   
   this.gameService.selectedGameEvent
   .subscribe( (game: Game[]) => {
-  this.game = game;
-  this.console = this.game[0].console;
-  this.price = this.game[0].price;
-  this.name = this.game[0].name;
-  this.rareness = this.game[0].rareness;
-  this.release = this.game[0].release;
-  this.genre = this.game[0].genre;
-  
+    console.log(this.games);
+  this.games = game;
+  this.console = this.games[0].console;
+  this.price = this.games[0].price;
+  this.name = this.games[0].name;
+  this.rareness = this.games[0].rareness;
+  this.release = this.games[0].release;
+  this.genre = this.games[0].genre;
+  console.log(this.games);
   }
 
   )
@@ -58,7 +59,7 @@ export class GamesDetailComponent implements OnInit {
 
 
 
-console.log(this.game);
+console.log(this.games);
   }
 
   // ngOnDestroy(){

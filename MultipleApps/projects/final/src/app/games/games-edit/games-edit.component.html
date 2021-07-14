@@ -4,18 +4,21 @@
       <div class="panel-heading">
         <h2 class="title">{{ name }}</h2>
         <hr />
-        <button type="submit" class="btn btn-success">Submit</button>
-        <button type="submit" class="btn btn-danger" >Cancel</button>
+        
+        
 
       </div>
-      <form id="game-edit" class="form-padding" #f>
+      <form (ngSubmit)="onSubmit(f)" id="game-edit" class="form-padding" #f="ngForm">
+        
         <div class="row">
           <div class="col-sm-6 form-group">
             <label for="name">Title:</label>
             <input 
+            id = "name"
             type="text" 
             class="form-control"
-            placeholder = "{{ name }} "
+            name = "name"
+            [ngModel]= name
              />
           </div>
         </div>
@@ -23,18 +26,23 @@
           <div class="col-sm-6 form-group">
             <label>Console: </label>
             <input 
+            id = "console"
             type="text" 
             class="form-control"
-            placeholder = "{{ console }} " />
+            name = "console"
+            [ngModel]= console
+             />
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6 form-group">
             <label>Release: </label>
             <input
+            id = "release"
             type="text"
             class="form-control"
-            placeholder = "{{ release }} "
+            name ="release"
+            [ngModel] = release
             />
           </div>
         </div>
@@ -42,9 +50,11 @@
           <div class="col-sm-6 form-group">
             <label>Price: </label>
             <input 
+            id = "price"
             type="text" 
             class="form-control"
-            placeholder = "{{ price }} "
+            name="price"
+            [ngModel]= price
             />
           </div>
         </div>
@@ -52,9 +62,11 @@
           <div class="col-sm-6 form-group">
             <label>Rare: </label>
             <input
+            id = "rare"
             type="text"
             class="form-control"
-            placeholder = "{{ rareness }} "
+            name="rare"
+            [ngModel]= rareness
             />
           </div>
         </div>
@@ -62,12 +74,17 @@
           <div class="col-sm-6 form-group">
             <label>Genre: </label>
             <input 
+            id = "genre"
             type="text" 
             class="form-control" 
-            placeholder = "{{ genre }} "
+            name="genre"
+            [ngModel] = genre
             />
           </div>
         </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="button" class="btn btn-danger" >Cancel</button>
+
       </form>
       <!-- <div class="panel-body game-item-desc">
         <ul class="list-group">

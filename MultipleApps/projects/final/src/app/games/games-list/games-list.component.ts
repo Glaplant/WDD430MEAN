@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { GameService } from '../game.service';
 import { Game } from '../games.model';
@@ -8,14 +9,24 @@ import { Game } from '../games.model';
   templateUrl: './games-list.component.html',
   styleUrls: ['./games-list.component.scss'],
 })
-export class GamesListComponent implements OnInit , OnDestroy {
-  games: Game[];
+export class GamesListComponent implements OnInit  {
+  @Input() games: Game[];
+  path: string;
   private subscription: Subscription;
+  private routeSub: Subscription;
 
-  constructor(private gameService: GameService) {}
+  constructor(private gameService: GameService,
+    private route: ActivatedRoute,
+    private router: Router) {}
 
   ngOnInit(): void {
-    this.games = this.gameService.getGames();
+    console.log(this.route.url);
+    this.subscription = this.route.url.subscribe((params:Params)=>{
+    this.path = params[0].path;
+    console.log(this.path);
+    this.gameService.getGames(this.path);
+    });
+
     this.subscription = this.gameService.gameChangedEvent.subscribe(
       (games: Game[]) => {
         this.games = games;
@@ -23,9 +34,12 @@ export class GamesListComponent implements OnInit , OnDestroy {
     );
   }
   
-  ngOnDestroy(){
-    this.subscription.unsubscribe();
 
+
+  newGame(){
+    
+    this.router.navigate(['./newGame'])
+   
   }
 
 

@@ -1,0 +1,100 @@
+<div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="title">New Game</h2>
+          <hr />
+          
+          
+  
+        </div>
+        <form (ngSubmit)="onSubmit(f)" id="new-game" class="form-padding" #f="ngForm">
+          
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <label for="name">Title:</label>
+              <input 
+              id = "name"
+              type="text" 
+              class="form-control"
+              name = "name"
+              [ngModel]= name
+               />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <label>Console: </label>
+              <input 
+              id = "console"
+              type="text" 
+              class="form-control"
+              name = "console"
+              [ngModel]= console
+               />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <label>Release: </label>
+              <input
+              id = "release"
+              type="text"
+              class="form-control"
+              name ="release"
+              [ngModel] = release
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <label>Price: </label>
+              <input 
+              id = "price"
+              type="text" 
+              class="form-control"
+              name="price"
+              [ngModel]= price
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <label>Rare: </label>
+              <input
+              id = "rare"
+              type="text"
+              class="form-control"
+              name="rare"
+              [ngModel]= rareness
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <label>Genre: </label>
+              <input 
+              id = "genre"
+              type="text" 
+              class="form-control" 
+              name="genre"
+              [ngModel] = genre
+              />
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success">Submit</button>
+          <button type="button" class="btn btn-danger" >Cancel</button>
+  
+        </form>
+        <!-- <div class="panel-body game-item-desc">
+          <ul class="list-group">
+            <li class="list-group-item">Console:</li>
+            <li class="list-group-item">Release:</li>
+            <li class="list-group-item">Price:</li>
+            <li class="list-group-item">Rareness:</li>
+            <li class="list-group-item">Genre:</li>
+          </ul>
+        </div> -->
+      </div>
+    </div>
+  </div>

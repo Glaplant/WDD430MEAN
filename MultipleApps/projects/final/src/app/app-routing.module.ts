@@ -8,36 +8,41 @@ import { GamesComponent } from './games/games.component';
 import { GamesListComponent } from './games/games-list/games-list.component';
 import { GamesItemComponent } from './games/games-item/games-item.component';
 import { GamesDetailComponent } from './games/games-detail/games-detail.component';
+import { GamesNewComponent } from './games/games-new/games-new.component';
+
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/collections', pathMatch: 'full'},
   { path: 'nes', component: GamesComponent, children:[
+    { path: 'newGame', component: GamesNewComponent },
     { path: ':id', component: GamesDetailComponent },
     { path: ':id/edit', component: GamesEditComponent },
   
   ]},
   { path: 'supernintendo', component: GamesComponent, children:[
+    { path: 'newGame', component: GamesNewComponent },
     { path: ':id', component: GamesDetailComponent },
     { path: ':id/edit', component: GamesEditComponent },
-  
   ]},
   { path: 'n64', component: GamesComponent, children:[
+    { path: 'newGame', component: GamesNewComponent },
     { path: ':id', component: GamesDetailComponent },
     { path: ':id/edit', component: GamesEditComponent },
-  
   ]},
   { path: 'gameCube', component: GamesComponent, children:[
+    { path: 'newGame', component: GamesNewComponent },
     { path: ':id', component: GamesDetailComponent },
     { path: ':id/edit', component: GamesEditComponent },
   
   ]},
   
   { path: 'collections', component: CollectionListComponent, children:[
+    { path: 'newGame', component: GamesNewComponent },
     { path: ':id', component: GamesDetailComponent },
     { path: ':id/edit', component: GamesEditComponent },
     ] },
   //{ path: 'games/:console', component: GamesComponent },
-  // { path: ':id/edit', component: GamesEditComponent },
+  
 
 ];
 
